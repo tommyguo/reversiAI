@@ -1,15 +1,15 @@
 # reversiAI
 Play reversi against a computer AI that uses Monte Carlo Tree Search
 
-##Dependencies:
+## Dependencies:
 Uses readline-sync: install with ```npm install readline-sync```
 
 
-##Playing the game:
+## Playing the game:
 Play against the AI by running game.js: ```node game.js```
 
 
-##How the AI works:
+## How the AI works:
 The AI chooses which move to play based on simulations stored in tree.json. It chooses whichever move has the highest win percentage.
 If the number of simulations for a given position is less than 30 * (number of valid moves from that position), then the AI will no 
 longer rely on stored simulations and will run 30 simulations per valid move and pick the best move from there.
