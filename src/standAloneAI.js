@@ -289,6 +289,6 @@ fs.writeFile("tree.json", JSON.stringify(tree), function(err) {
     if(err) {
         return console.log(err);
     }
-    console.log("Recorded " + NUMBER_OFLOOPS + " moves.");
+    console.log("Recorded " + NUMBER_OF_LOOPS + " moves.");
     console.log("Total number of simulations in tree.json:", tree.playCount);
 });
