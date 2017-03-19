@@ -39,7 +39,7 @@ const tree = new Tree(treeObj.moves, treeObj.playCount);
 
 
 // how many loops of Monte Carlo Tree Search you want to run
-const NUMBER_OF_LOOPS = readlineSync.question('Enter the number of trials?: ');
+const NUMBER_OF_LOOPS = readlineSync.question('Enter the number of simulations you want to run: ');
 
 for (let i = 0; i < NUMBER_OF_LOOPS; i++) {
   // generate new board to run monte carlo tree search
@@ -73,7 +73,7 @@ for (let i = 0; i < NUMBER_OF_LOOPS; i++) {
       return board;
   }
 
-  //console.log("in selection phase");
+
   let notFound = true;
   while (notFound) {
     // checks if there is a "pass" condition — then # of moves = 1, but # of validMoves = 0
@@ -128,11 +128,9 @@ for (let i = 0; i < NUMBER_OF_LOOPS; i++) {
       notFound = false;
     }
   }
-  //console.log("selected move:", currentNode);
 
 
   // expansion phase — choose an unvisited child node
-  //console.log("in expansion phase");
   // checks if there is a "pass" condition — then no valid moves, but a pass node should still be created,
   // currentLetter should be switched, and then proceed normally
   if (rev.getValidMoves(board, currentLetter).length === 0) {
@@ -195,14 +193,12 @@ for (let i = 0; i < NUMBER_OF_LOOPS; i++) {
   // record the move in moves property of previous move and also in playedNodes
   currentNode.moves.push(unvisitedMoveNode);
   playedNodes.push(unvisitedMoveNode);
-  //console.log("picked move:", unvisitedMoveNode.move);
 
 
   // simulation phase — play out moves starting from unvisitedMove
 
   // in the context of this function, play out simluation as if "computer" is playing
   // the unvisitedMove and "player" is the opponent
-  //console.log("in simulation phase");
   function playout(board, computerLetter, move) {
     let playerLetter;
     if (computerLetter === "O") {
@@ -267,7 +263,7 @@ for (let i = 0; i < NUMBER_OF_LOOPS; i++) {
 
 
   // back-propagation phase — update play counts and win counts of played nodes
-  //console.log("in back-propagation phase");
+
   tree.playCount ++;
   playedNodes.forEach(moveNode => {
     moveNode.playCount ++;
@@ -283,7 +279,7 @@ for (let i = 0; i < NUMBER_OF_LOOPS; i++) {
     }
   });
 
-  console.log("running trial number ", i + 1);
+  console.log("running simulation number ", i + 1);
 }
 
 
@@ -293,5 +289,6 @@ fs.writeFile("tree.json", JSON.stringify(tree), function(err) {
     if(err) {
         return console.log(err);
     }
-    console.log("Recorded moves");
+    console.log("Recorded " + NUMBER_OFLOOPS + " moves.");
+    console.log("Total number of simulations in tree.json:", tree.playCount);
 });

@@ -117,7 +117,6 @@ function playout(board, computerLetter, moveNode) {
 function getComputerMove(board, computerLetter, currentNode) {
   // loads preset move if enough available data
   if (currentNode !== undefined && currentNode.playCount > 30 * rev.getValidMoves(board, computerLetter).length) {
-    //console.log("preset move");
     const bestMove = currentNode.moves.reduce((bestMove, move) => {
       if (move.getRatio() > bestMove.getRatio()) {
         return move;
@@ -130,7 +129,6 @@ function getComputerMove(board, computerLetter, currentNode) {
   }
   // calculates new move if not enough available data
   else {
-    //console.log("improvised move");
     let moves = rev.getValidMoves(board, computerLetter);
     // converts array of moves to move nodes
     moves = moves.map((move => new Node(move)));
@@ -148,7 +146,7 @@ function getComputerMove(board, computerLetter, currentNode) {
   }
 }
 
-// 
+//
 function recordPlayerMove(currentNode, playerMove) {
   // sets currentNode to move node if it exists, else set it to undefined
   if (currentNode !== undefined) {
